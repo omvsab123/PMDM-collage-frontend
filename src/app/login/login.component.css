@@ -1,0 +1,58 @@
+.body {
+font-family: Arial, sans-serif;
+/* background-color: #f0f4f8; */
+background-image: url('../../assets/img/front1.jpg');
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+
+
+.login-container {
+background-color: #fff;
+padding: 30px;
+border-radius: 10px;
+box-shadow: 0 0 80px rgba(0, 0, 0);
+width: 400px;
+height: 500px;
+margin-top: 100px;
+text-align: center;
+}
+.body h2 {color: rgb(170, 73, 73); text-shadow: 0px 3px 4px black;}
+.body label{color: black; font-weight: bold;}
+
+input {
+width: 100%;
+padding: 10px;
+margin: 10px 0;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+
+button {
+width: 100%;
+padding: 10px;
+background-color: #007BFF;
+color: white;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+
+button:hover {
+background-color: #0056b3;
+}
+
+
+#message {
+margin-top: 10px;
+font-size: 14px;
+color: red;
+}

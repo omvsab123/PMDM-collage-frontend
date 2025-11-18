@@ -1,0 +1,24 @@
+<div class="body" style="margin-top: 50px; margin-bottom: 50px;">
+<div class="login-container">
+  <h2>College Login</h2>
+  <img style="width: 100px;" src="assets/logo.png" alt=""><br><br><br>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <label for="username">College ID:</label>
+    <input type="text" id="username" name="username" [(ngModel)]="username" placeholder="Enter your ID" required /><br><br>
+
+    <label for="password">College Password:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Enter password" required />
+
+    <br><br> 
+    <button type="submit" [disabled]="isLoading">{{ isLoading ? 'Logging in...' : 'Login' }}</button>
+    <p [style.color]="messageColor">{{ message }}</p>
+  </form>
+
+  <!-- Display college data if login is successful -->
+  <div *ngIf="collegeData && messageColor === 'green'" style="margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px;">
+    <h3>College Information:</h3>
+    <pre>{{ collegeData | json }}</pre>
+  </div>
+</div>
+
+</div>

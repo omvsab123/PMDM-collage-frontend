@@ -1,0 +1,206 @@
+
+
+/*table starts*/
+.bcom-courses {
+  margin-top: 100px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  padding: 30px;
+  background-color: #f8f9fa;
+  color: #2c3e50;
+}
+
+.bcom-courses h2 {
+  text-align: center;
+  color: #0c0c4a;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bcom-courses h3 {
+  text-align: center;
+  margin-top: 40px;
+  color: #1a5276;
+  border-left: 5px solid #3498db;
+  padding-left: 10px;
+  font-size: 1.3rem;
+}
+
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-table th {
+  background-color: #3498db;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.course-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eaeaea;
+  text-align: center;
+}
+
+.course-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.course-table tr:hover {
+  background-color: #d6eaf8;
+  transition: 0.3s;
+}
+
+.course-table th[colspan] {
+  background-color: #1f618d;
+  font-size: 1.1rem;
+}
+/*table ends*/
+
+
+
+
+/* staff */
+  .body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f4f8;
+      margin: 0;
+      padding: 20px;
+    }
+   
+
+    h1 {
+      text-align: center;
+      color: #1a237e;
+    }
+
+    .staff-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .staff-box {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .staff-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .staff-box img {
+      width: 100%;
+      height: 200px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      object-fit: cover;
+    }
+
+    .staff-box h3 {
+      margin: 10px 0 5px;
+      color: #0d47a1;
+    }
+
+    .staff-box p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .contact-info {
+      margin: 10px 0 15px;
+    }
+
+    .contact-info a {
+      display: inline-block;
+      background-color: #1e88e5;
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      margin: 4px;
+      font-size: 14px;
+    }
+
+    .contact-info a:hover {
+      background-color: #1565c0;
+    }
+    /* staff end */
+
+    /* department description */
+    .about-box {
+  background: #ffffff;
+  border-left: 6px solid #1b4b7c;
+  border-radius: 12px;
+  padding: 25px 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 40px;
+}
+
+.about-box h2 {
+  margin-bottom: 10px;
+  color: #1b4b7c;
+  font-size: 1.5rem;
+}
+
+.about-box p {
+  color: black;
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+/* table */
+/* Unique selector: only affects table with class 'college-programs' */
+.college-programs {
+  width: 60%;
+  margin: 40px auto;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.college-programs th, 
+.college-programs td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.college-programs th {
+  background-color: #0e5aaf;
+  color: white;
+  font-size: 16px;
+}
+
+.college-programs tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.college-programs tr:hover {
+  background-color: #f1f1f1;
+}
+
+.college-programs td {
+  font-size: 15px;
+  color: #333;
+}
+.facilities li{margin-left: 120px;}
+/* table end */
+    /* department description end */

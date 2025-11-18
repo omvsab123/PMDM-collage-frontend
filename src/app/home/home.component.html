@@ -1,0 +1,170 @@
+
+     <!-- Hero Section -->
+  <section class="hero" style="margin-top: 140px; height: 600px;">
+    <div class="hero-content">
+    <!-- <h2>Welcome to  <span>Padmashree Manibhai Desai College</span></h2> -->
+    
+    </div>
+  </section>
+
+
+  <!-- Two-Column Section: Events (Left) + College Details (Right) -->
+  <section class="events-details-section">
+    <div class="events-details-container">
+      <!-- LEFT: Event Box -->
+      <div class="events-box-column">
+        <div class="events-box">
+          <h4>📅 Upcoming Events</h4>
+          <div class="events-list marquee-viewport" aria-label="Upcoming events">
+            <div class="marquee-track">
+              <div class="marquee-item" *ngFor="let e of eventsData">
+                <a [href]="e.url" target="_blank">{{ e.headline || e.title }}</a>
+              </div>
+              <!-- duplicated items for smooth continuous loop -->
+              <div class="marquee-item" *ngFor="let e of eventsData">
+                <a [href]="e.url" target="_blank">{{ e.headline || e.title }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: College Details -->
+      <div class="college-details-column">
+        <div class="college-details-box">
+          <h4>College Overview</h4>
+          <p><strong>Name:</strong> Padmashri Manibhai Desai College, Uruli Kanchan</p>
+          <p><strong>Vision:</strong> To follow Gandhiji's principle of holistic development based on truth and humanity.</p>
+          <p><strong>Mission:</strong> To provide quality and skill-based education to make the rural community self-reliant and capable.</p>
+          <p><strong>Motto:</strong> "From darkness to light."</p>
+          <hr>
+          <p style="font-size: 0.9rem; color: #666;">For more information, visit the about section.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features (Leadership) Section -->
+  <section class="features">
+    <h2>Our Leadership Team</h2>
+    <div class="feature-grid">
+      <a href="#" class="depa2">
+        <div class="feature-card">
+          <img src="https://www.tribuneindia.com/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhldHJpYnVuZS1zb3J0ZC1wcm8tcHJvZC1zb3J0ZC9tZWRpYTY4YjdmNWUwLTRlODgtMTFlZi1hOWM2LTU3MzgwY2VmMTg5Yy5qcGc=" alt="Sharadchandra Pawar">
+          <h3>Sharadchandra Pawar</h3>
+          <p class="position">President</p>
+          <p class="group">Mahatma Gandhi Sarvodaya Sangh, Uruli Kanchan</p>
+        </div>
+      </a>
+
+      <a href="#" class="depa3">
+        <div class="feature-card">
+          <img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-2409187029.jpg" alt="Prof. K. D. Kanchan">
+          <h3>Prof. K. D. Kanchan</h3>
+          <p class="position">Vice President</p>
+          <p class="group">Mahatma Gandhi Sarvodaya Sangh, Uruli Kanchan</p>
+        </div>
+      </a>
+
+      <a href="#" class="depa4">
+        <div class="feature-card">
+          <img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-2409187029.jpg" alt="Sopanrao Kanchan">
+          <h3>Sopanrao Kanchan</h3>
+          <p class="position">Secretary</p>
+          <p class="group">Mahatma Gandhi Sarvodaya Sangh, Uruli Kanchan</p>
+        </div>
+      </a>
+
+      <a href="#" class="depa4">
+        <div class="feature-card">
+          <img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-2409187029.jpg" alt="Rajaram Kanchan">
+          <h3>Rajaram Kanchan</h3>
+          <p class="position">Treasurer</p>
+          <p class="group">Mahatma Gandhi Sarvodaya Sangh, Uruli Kanchan</p>
+        </div>
+      </a>
+
+      <a href="#" class="depa4">
+        <div class="feature-card">
+          <img src="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-2409187029.jpg" alt="Principal">
+          <h3>Prof. (Dr.) Shivaji Borhade</h3>
+          <p class="position">Principal</p>
+          <p class="group">Padmashri Manibhai Desai College, Uruli Kanchan</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+<!-- vip card -->
+<div class="vip-card">
+  <!-- Left: VIP Image -->
+  <div class="vip-img">
+    <img src="assets/vip.png" alt="VIP Guest">
+  </div>
+  <!-- Right: Description -->
+  <div class="vip-info">
+    <h2>Special Guest:  Hon. Shri Sharadchandraji Govindrao Pawar</h2>
+    <h3>(Former Union Minister of Agriculture, Government of India)</h3>
+    <h3>President, Mahatma Gandhi Sarvodaya Sangh</h3>
+    <p><strong>Our Motto:</strong> "From darkness to light."</p>
+    <p><strong>Our Mission:</strong> To provide quality and skill-based education to make the rural community self-reliant and capable.</p>
+    <p><strong>Our Vision:</strong> To follow Gandhiji's principle of holistic development based on truth and humanity.</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr style="border: 2px solid #ccc; margin-top: 100px; margin-bottom: -50px; margin-left: 190px; margin-right: 190px;">
+  <!-- Gallery -->
+    <h2 class="h2">📸 College  <span style="color: rgb(72, 170, 235);">Gallery</span></h2>
+  <section class="gallery" style="margin-top: -110px;">
+<br><br><br><br><br><br><br><br><br><br>
+  <div class="gallery-item">
+    <img src="assets/cantin.png" alt="Students in classroom">
+    <div class="overlay">Canteen</div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="assets/chemicallab.png" alt="Friends at campus">
+    <div class="overlay">Chemistry Lab</div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="assets/comlab.png" alt="Graduation ceremony">
+    <div class="overlay">Computer Lab</div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="assets/gym.png" alt="Library study time">
+    <div class="overlay">Collage Gym</div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="assets/lab.png" alt="Cultural festival">
+    <div class="overlay">Microbiology</div>
+  </div><br><br>
+
+  <div class="gallery-item">
+    <img src="assets/playground.png" alt="Sports day">
+    <div class="overlay">Playground</div>
+  </div>
+
+  <div class="gallery-item">
+    <img src="assets/studylab.png" alt="College canteen">
+    <div class="overlay">Study Lab</div>
+  </div>
+
+ 
+</section>
+
+<app-footer></app-footer>
