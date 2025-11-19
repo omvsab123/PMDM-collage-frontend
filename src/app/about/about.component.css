@@ -8,7 +8,7 @@
   color: #222;
   font-family: 'Poppins', sans-serif;
 }
-
+p,li{ font-family: "Arial", sans-serif; }
 .about-container h1 {
   text-align: center;
   color: #1b4b7c;

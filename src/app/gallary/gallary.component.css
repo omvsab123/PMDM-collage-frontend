@@ -1,0 +1,65 @@
+/* ------------------------------gallary section------------- */
+.gallery{ margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      /* background: var(--bg1); */
+      background-color: white;
+    }
+      
+      .h2{ text-align: center;
+        font-family: 'Brush Script MT', cursive;
+      padding: 20px;
+      font-size: 4rem;
+      color: #000000;}
+       .gallery {
+      column-count: 3;
+      column-gap: 80px;
+      padding: 80px 60px;
+      /* padding: 20px;
+      max-width: 1200px;
+      margin: auto; */
+    }
+    .gallery h2 span{color: var(--accent-2);}
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 60px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.45);
+      color: #fff;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 12px;
+      transition: opacity 0.4s;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .gallery-item:hover .overlay {
+      opacity: 1;
+    }
+/* ------------------------------gallary section over------------- */

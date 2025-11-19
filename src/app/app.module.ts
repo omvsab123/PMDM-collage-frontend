@@ -22,6 +22,8 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { Activity1Component } from './activity1/activity1.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { GallaryComponent } from './gallary/gallary.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { DashbordComponent } from './dashbord/dashbord.component';
     FooterComponent,
     LoginComponent,
     Activity1Component,
-    DashbordComponent
+    DashbordComponent,
+    GallaryComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,

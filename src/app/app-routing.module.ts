@@ -16,6 +16,8 @@ import { HeadernavComponent } from './headernav/headernav.component';
 import { LoginComponent } from './login/login.component';
 import { Activity1Component } from './activity1/activity1.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { GallaryComponent } from './gallary/gallary.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -34,7 +36,9 @@ const routes: Routes = [
   { path: 'headernav', component: HeadernavComponent },
   {path:'login', component:LoginComponent},
   {path:'activity1',component:Activity1Component},
-  {path:'dashboard',component:DashbordComponent}
+  {path:'dashboard',component:DashbordComponent},
+  {path:'gallery',component:GallaryComponent},
+  {path:'contactUs',component:ContactUsComponent}
 ];
 
 @NgModule({
