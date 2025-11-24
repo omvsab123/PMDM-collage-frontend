@@ -6,16 +6,35 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  private apiUrl = 'http://localhost:3000/api';
+  // Use production backend URL (or set to '/api' if you have a local proxy configured)
+  private apiUrl = 'https://pmd-college-backend.onrender.com/api';
   private collegeData: any = null;
 
   constructor(private http: HttpClient) { }
 
   // ===== LOGIN =====
-  login(id: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { id, pass: password });
+  login(email: string, password: string): Observable<any> {
+  return this.http.post(`${this.apiUrl}/auth/login`, { email, password });
+}
+
+saveLoginData(data: any) {
+  localStorage.setItem('token', data.token);
+  localStorage.setItem('user', JSON.stringify(data.user));
+}
+
+
+  getCollege() {
+    const c = localStorage.getItem('college');
+    return c ? JSON.parse(c) : null;
   }
 
+  getToken() {
+    return localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.clear();
+  }
   // ===== STORE & GET COLLEGE DATA =====
   setCollegeData(data: any) {
     this.collegeData = data;
@@ -32,14 +51,16 @@ export class LoginService {
     return null;
   }
 
-  logout() {
-    this.collegeData = null;
-    localStorage.removeItem('collegeData');
-  }
+ 
 
   // ===== GET EVENTS =====
   getEvents(collegeId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/college/${collegeId}/events`);
+  }
+
+  // ===== GET ALL EVENTS =====
+  getAllEvents(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/events/all`);
   }
 
   // ===== GET ALL COLLEGES (useful if no college is logged in) =====

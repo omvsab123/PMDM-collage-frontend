@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { LoginService } from './login.service';
 import { Router } from '@angular/router';
-
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,53 +8,49 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username: string = '';
+  
+  email: string = '';
   password: string = '';
+
   message: string = '';
   messageColor: string = 'red';
   isLoading: boolean = false;
-  collegeData: any = null;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) {}
 
- onSubmit() {
-  if (!this.username || !this.password) {
-    this.message = 'Please fill in all fields';
-    this.messageColor = 'red';
+  onSubmit() {
+
+    if (!this.email || !this.password) {
+      this.message = 'Please fill all fields';
+      this.messageColor = 'red';
+      return;
+    }
+
+    this.isLoading = true;
+
+    this.loginService.login(this.email, this.password).subscribe({
+     next: (res) => {
+  this.isLoading = false;
+
+  if (!res.success) {
+    this.message = res.message || "Invalid credentials";
+    this.messageColor = "red";
     return;
   }
 
-  this.isLoading = true;
-  this.message = 'Logging in...';
-  this.messageColor = 'blue';
+  this.loginService.saveLoginData(res);
 
-  this.loginService.login(this.username, this.password).subscribe(
-    (response) => {
-      this.isLoading = false;
+  this.message = "Login successful!";
+  this.messageColor = "green";
 
-      //  If response contains error or user is null → do not navigate
-    if (!response || response.message === "Invalid username or password") {
-  this.message = "Invalid username or password";
-  this.messageColor = "red";
-  return;
-}
+  this.router.navigate(['/dashboard']);
+},
 
-
-
-      // ✔ Save data and navigate only when login is valid
-      this.loginService.setCollegeData(response);
-
-      this.message = 'Login successful!';
-      this.messageColor = 'green';
-
-      this.router.navigate(['/dashboard']);
-    },
-    (error) => {
-      this.isLoading = false;
-      this.message = error.error?.message || 'Invalid username or password';
-      this.messageColor = 'red';
-    }
-  );
-}
-
+      error: (err) => {
+        this.isLoading = false;
+        this.message = err.error?.message || 'Invalid email or password';
+        this.messageColor = 'red';
+      }
+    });
+  }
 }

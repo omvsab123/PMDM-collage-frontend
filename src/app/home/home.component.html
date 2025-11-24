@@ -3,7 +3,8 @@
   <section class="hero" style="margin-top: 140px; height: 600px;">
     <div class="hero-content">
     <!-- <h2>Welcome to  <span>Padmashree Manibhai Desai College</span></h2> -->
-    
+    <p>Total events: {{ eventsData.length }}</p>
+
     </div>
   </section>
 
@@ -18,11 +19,10 @@
           <div class="events-list marquee-viewport" aria-label="Upcoming events">
             <div class="marquee-track">
               <div class="marquee-item" *ngFor="let e of eventsData">
-                <a [href]="e.url" target="_blank">{{ e.headline || e.title }}</a>
-              </div>
-              <!-- duplicated items for smooth continuous loop -->
-              <div class="marquee-item" *ngFor="let e of eventsData">
-                <a [href]="e.url" target="_blank">{{ e.headline || e.title }}</a>
+                <a href="#" (click)="$event.preventDefault(); openImage(e.image)">
+                  <span class="event-thumb" *ngIf="e.image"><img [src]="e.image" alt="{{e.title || e.headline}}"/></span>
+                  <span class="event-title">{{ e.headline || e.title }}</span>
+                </a>
               </div>
             </div>
           </div>
@@ -128,3 +128,11 @@
  
 
 <app-footer></app-footer>
+
+<!-- Image preview modal -->
+<div class="image-modal" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeModal()">✕</button>
+    <img [src]="modalImageUrl" alt="Event image" />
+  </div>
+</div>

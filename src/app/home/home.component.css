@@ -179,22 +179,21 @@ a img {
 
 /* Smooth CSS marquee */
 .marquee-viewport {
-  height: 260px; /* same as events-list height */
+  height: auto;          /* allow full list height */
+  max-height: 450px;     /* visible area */
   overflow: hidden;
-  position: relative;
 }
 
 .marquee-track {
   display: flex;
   flex-direction: column;
-  /* duration controls speed - adjust variable to change speed */
-  --marquee-duration: 10s;
-  animation: marquee-scroll var(--marquee-duration) linear infinite;
   will-change: transform;
+  animation: marquee-scroll 12s linear infinite;  /* FIX ADDED */
 }
 
 .marquee-item {
   padding: 8px 0;
+  min-height: 60px;
 }
 
 .marquee-item a {
@@ -208,12 +207,58 @@ a img {
 
 .marquee-item a:hover { background: #0c0c4a; color: white; }
 
+/* Small thumbnail inside event list */
+.event-thumb img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.event-title { vertical-align: middle; }
+
+/* Image modal */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.image-modal .modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow: auto; /* allow scrolling inside modal if image is large */
+  padding: 8px;
+  background: transparent;
+}
+.image-modal img { display: block; max-width: 100%; height: auto; max-height: 85vh; border-radius: 8px; }
+.modal-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
 /* pause on hover */
 .marquee-viewport:hover .marquee-track { animation-play-state: paused; }
 
 @keyframes marquee-scroll {
   0%   { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+  100% { transform: translateY(-100%); }
 }
 
 

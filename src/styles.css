@@ -24,3 +24,8 @@
       color: #e6eef8;
       -webkit-font-smoothing:antialiased;
     }
+/* When modal is open, prevent body scrolling */
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+}

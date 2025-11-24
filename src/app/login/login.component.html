@@ -1,24 +1,38 @@
-<div class="body" style="margin-top: 50px; margin-bottom: 50px;">
-<div class="login-container">
-  <h2>College Login</h2>
-  <img style="width: 100px;" src="assets/logo.png" alt=""><br><br><br>
-  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-    <label for="username">College ID:</label>
-    <input type="text" id="username" name="username" [(ngModel)]="username" placeholder="Enter your ID" required /><br><br>
+<div class="login-wrapper">
+  <div class="login-card">
+    <img src="assets/logo.png" alt="Logo" class="logo" />
 
-    <label for="password">College Password:</label>
-    <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Enter password" required />
+    <h2 class="title">College Login</h2>
 
-    <br><br> 
-    <button type="submit" [disabled]="isLoading">{{ isLoading ? 'Logging in...' : 'Login' }}</button>
-    <p [style.color]="messageColor">{{ message }}</p>
-  </form>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
 
-  <!-- Display college data if login is successful -->
-  <div *ngIf="collegeData && messageColor === 'green'" style="margin-top: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px;">
-    <h3>College Information:</h3>
-    <pre>{{ collegeData | json }}</pre>
+      <div class="form-group">
+        <label>Email</label>
+        <input 
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+          placeholder="Enter email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input 
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+          placeholder="Enter password"
+        />
+      </div>
+
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Logging in...' : 'Login' }}
+      </button>
+
+      <p class="message" [style.color]="messageColor">{{ message }}</p>
+    </form>
   </div>
-</div>
-
 </div>
