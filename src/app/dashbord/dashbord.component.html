@@ -1,75 +1,47 @@
-<div class="dashboard-container" style="margin-top: 150px;">
-  <header class="dashboard-header">
-    <h2>Dashboard</h2>
-    <div class="college-meta" *ngIf="collegeInfo">
-      <div class="college-title">College: <span class="college-name">{{ collegeInfo.name }}</span></div>
-      <div class="college-id">ID: <span>{{ collegeInfo.id }}</span></div>
+
+
+<br><br><br><br><br><br>
+<div class="dashboard-container">
+
+  <div class="top-bar">
+    <h1>📌 Dashboard – Manage Events</h1>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <!-- SECTION 1: Upload Image -->
+  <div class="card">
+    <h3>1️⃣ Upload Image</h3>
+
+    <div class="form-row">
+      <input type="file" #fileInput class="file-input" style="color: black;">
+      <button class="primary-btn" (click)="uploadImage(fileInput)">Upload Image</button>
     </div>
-    <div class="actions">
-      <button class="btn btn-success" (click)="showAddForm()" *ngIf="!addingEvent">+ Add Event</button>
-      <button class="btn btn-danger logout-btn" (click)="logout()">Logout</button>
+
+    <div *ngIf="uploadedImageUrl" class="preview-box">
+      <p><strong>Preview:</strong></p>
+      <img [src]="uploadedImageUrl" class="preview-img">
     </div>
-  </header>
+  </div>
 
-  <main>
-    <div *ngIf="message" class="message" [class.success]="messageType === 'success'" [class.error]="messageType === 'error'">{{ message }}</div>
+  <!-- SECTION 2: Add Event -->
+  <div class="card">
+    <h3>2️⃣ Add Event</h3>
 
-    <section *ngIf="addingEvent" class="add-form">
-      <h4>Add New Event</h4>
-      <label>Event Headline</label>
-      <input [(ngModel)]="newHeadline" placeholder="Enter event headline" class="input" />
+    <div class="form-row">
+      <input type="text" placeholder="Enter headline" [(ngModel)]="headline" class="text-input">
+      <button class="success-btn" (click)="addEvent()">Add Event</button>
+    </div>
+  </div>
 
-      <label>PDF URL</label>
-      <input [(ngModel)]="newUrl" placeholder="https://example.com/document.pdf" class="input" />
+  <!-- EVENTS LIST -->
+  <h3 class="list-title">📅 All Events</h3>
 
-      <div class="form-actions">
-        <button class="btn btn-success" (click)="addNewEvent()">Add Event</button>
-        <button class="btn btn-secondary" (click)="cancelAdd()">Cancel</button>
-      </div>
-    </section>
+  <div class="event-list">
+    <div class="event-card" *ngFor="let ev of events">
+      <img [src]="ev.image" alt="Event Image" class="event-img">
+      <h4 style="color: rgb(25, 81, 249);">{{ ev.title }}</h4>
+      <button class="delete-btn" (click)="deleteEvent(ev.id)">Delete</button>
+    </div>
+  </div>
 
-    <section class="events-summary">
-      <h4>Events (Total: {{ events.length }})</h4>
-      <div *ngIf="events.length === 0" class="empty">No events. Click "Add Event" to create one.</div>
-    </section>
-
-    <section class="events-list">
-      <div *ngFor="let event of events" class="event-card" style="background-color: rgb(225, 220, 220);">
-
-        <div *ngIf="editingEventId !== (event.id || event._id)" class="event-view" >
-          <div class="event-info">
-            <div class="field">
-              <label>Headline</label>
-              <div class="value">{{ event.headline }}</div>
-            </div>
-            <div class="field">
-              <label>PDF URL</label>
-              <div class="value url"><a [href]="event.url" target="_blank">View PDF</a></div>
-            </div>
-          </div>
-          <div class="event-actions">
-            <button class="btn btn-primary" (click)="startEdit(event)">Edit</button>
-            <button class="btn btn-danger" (click)="deleteEvent(event.id || event._id)">Delete</button>
-          </div>
-        </div>
-
-        <div *ngIf="editingEventId === (event.id || event._id)" class="edit-form">
-          <h5>Edit Event</h5>
-          <label>Event Headline</label>
-          <input [(ngModel)]="editHeadline" class="input" />
-
-          <label>PDF URL</label>
-          <input [(ngModel)]="editUrl" class="input" />
-
-          <div class="form-actions">
-            <button class="btn btn-success" (click)="updateEvent()">Update</button>
-            <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <div *ngIf="!collegeInfo" class="no-data">No data available. Please login again.</div>
-  </main>
 </div>

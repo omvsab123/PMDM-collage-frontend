@@ -19,7 +19,7 @@ export class LoginComponent {
   constructor(private loginService: LoginService, private router: Router) {}
 
   onSubmit() {
-
+               console.log("Stored Token:", localStorage.getItem("token"));  //this line will display tocken in console for debuging purpose
     if (!this.email || !this.password) {
       this.message = 'Please fill all fields';
       this.messageColor = 'red';

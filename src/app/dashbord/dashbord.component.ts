@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashbord',
@@ -9,158 +7,120 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashbord.component.css']
 })
 export class DashbordComponent implements OnInit {
-  collegeInfo: any;
-  events: any[] = [];
-  editingEventId: string | null = null;
-  editHeadline: string = '';
-  editUrl: string = '';
-  addingEvent = false;
-  newHeadline: string = '';
-  newUrl: string = '';
-  message: string = '';
-  messageType: 'success' | 'error' = 'success';
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  events: any[] = [];
+  headline: string = "";
+  uploadedImageUrl: string = "";
+
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
-    const stored = this.loginService.getCollegeData();
-    if (!stored || !stored.id) {
-      this.router.navigate(['/login']);
-      return;
-    }
-    this.collegeInfo = stored;
     this.loadEvents();
+    //tocken display for debuging purpose
+     this.token = localStorage.getItem("token");
+  console.log("Dashboard Token:", this.token);
   }
 
+  // Load all events
   loadEvents() {
-    if (!this.collegeInfo) return;
-    this.loginService.getEvents(this.collegeInfo.id).subscribe(
-      (res) => {
-        this.events = res || [];
-        try {
-          localStorage.setItem('cachedEvents', JSON.stringify(this.events));
-        } catch (e) {
-          console.warn('Failed to cache events', e);
-        }
+    this.loginService.getAllEvents().subscribe({
+      next: (res) => {
+        this.events = res.data || [];
       },
-      (err) => {
-        console.error('Failed to load events', err);
-        this.events = [];
-      }
-    );
+      error: () => alert("Failed to load events")
+    });
   }
 
-  // ===== ADD EVENT =====
-  showAddForm() {
-    this.addingEvent = true;
-    this.newHeadline = '';
-    this.newUrl = '';
-    this.message = '';
-  }
+  // Upload image
+ // SECTION 1: Upload Image ONLY
+  // uploadImage(fileInput: any) {
+  //   const file = fileInput.files[0];
+  //   if (!file) return alert("Please select a file");
 
-  cancelAdd() {
-    this.addingEvent = false;
-    this.newHeadline = '';
-    this.newUrl = '';
-    this.message = '';
-  }
+  //   const formData = new FormData();
+  //   formData.append("image", file);
 
-  addNewEvent() {
-    if (!this.newHeadline || !this.newUrl) {
-      this.message = 'Please fill headline and URL';
-      this.messageType = 'error';
-      return;
+  //   this.loginService.uploadImage(formData).subscribe({
+  //     next: (res: any) => {
+  //       this.uploadedImageUrl = res.imageUrl;   // <-- STORE URL
+  //       alert("Image uploaded successfully");
+
+  //       console.log("Uploaded Image URL:", this.uploadedImageUrl);
+  //     },
+  //     error: () => alert("Failed to upload image")
+  //   });
+  // }
+ uploadImage(fileInput: any) {
+  const file = fileInput.files[0];
+  if (!file) return alert("Please select a file");
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  this.loginService.uploadImage(formData).subscribe({
+    next: (res: any) => {
+      console.log("Upload Success:", res);
+      this.uploadedImageUrl = res.imageUrl;   // use this for adding event
+      alert("Image uploaded successfully");
+    },
+    error: (err) => {
+      console.error("Upload error:", err);
+      alert("Failed to upload image");
+    }
+  });
+}
+
+
+
+  // Add event
+   // SECTION 2: Add Event with headline + uploaded image URL
+  addEvent() {
+    if (!this.headline || !this.uploadedImageUrl) {
+      return alert("Headline and uploaded image are required");
     }
 
-    const newEvent = {
-      headline: this.newHeadline,
-      url: this.newUrl
+    const eventData = { 
+      title: this.headline, 
+      image: this.uploadedImageUrl 
     };
 
-    this.loginService.createEvent(this.collegeInfo.id, newEvent).subscribe(
-      (res) => {
-        this.message = '✓ Event added successfully';
-        this.messageType = 'success';
-        this.events.push(res);
-        try { localStorage.setItem('cachedEvents', JSON.stringify(this.events)); } catch(e){/* ignore */}
-        this.newHeadline = '';
-        this.newUrl = '';
-        this.addingEvent = false;
+    this.loginService.addEvent(eventData).subscribe({
+      next: () => {
+        alert("Event added successfully");
+        this.headline = "";
+        this.uploadedImageUrl = ""; // clear
+        this.loadEvents();
       },
-      (err) => {
-        this.message = 'Failed to add event';
-        this.messageType = 'error';
-      }
-    );
+      error: () => alert("Failed to add event")
+    });
   }
 
-  // ===== EDIT EVENT =====
-  startEdit(event: any) {
-    this.editingEventId = event.id || event._id;
-    this.editHeadline = event.headline;
-    this.editUrl = event.url;
-    this.message = '';
-  }
+  // Delete event
+  deleteEvent(id: number) {
+    if (!confirm("Delete this event?")) return;
 
-  cancelEdit() {
-    this.editingEventId = null;
-    this.editHeadline = '';
-    this.editUrl = '';
-    this.message = '';
-  }
-
-  updateEvent() {
-    if (!this.editHeadline || !this.editUrl) {
-      this.message = 'Please fill headline and URL';
-      this.messageType = 'error';
-      return;
-    }
-
-    const updatedEvent = {
-      headline: this.editHeadline,
-      url: this.editUrl
-    };
-
-    this.loginService.updateEvent(this.collegeInfo.id, this.editingEventId!, updatedEvent).subscribe(
-      (res) => {
-        this.message = '✓ Event updated successfully';
-        this.messageType = 'success';
-        const index = this.events.findIndex(e => (e.id || e._id) === this.editingEventId);
-        if (index > -1) {
-          this.events[index] = res;
-          try { localStorage.setItem('cachedEvents', JSON.stringify(this.events)); } catch(e){/* ignore */}
-        }
-        this.editingEventId = null;
-        this.editHeadline = '';
-        this.editUrl = '';
+    this.loginService.deleteEvent(id).subscribe({
+      next: () => {
+        alert("Event deleted");
+        this.loadEvents();
       },
-      (err) => {
-        this.message = 'Failed to update event';
-        this.messageType = 'error';
-      }
-    );
+      error: () => alert("Failed to delete event")
+    });
   }
 
-  // ===== DELETE EVENT =====
-  deleteEvent(eventId: string) {
-    if (!confirm('Delete this event?')) return;
 
-    this.loginService.deleteEvent(this.collegeInfo.id, eventId).subscribe(
-      (res) => {
-        this.message = '✓ Event deleted successfully';
-        this.messageType = 'success';
-        this.events = this.events.filter(e => (e.id || e._id) !== eventId);
-        try { localStorage.setItem('cachedEvents', JSON.stringify(this.events)); } catch(e){/* ignore */}
-      },
-      (err) => {
-        this.message = 'Failed to delete event';
-        this.messageType = 'error';
-      }
-    );
-  }
-
+  // Logout
   logout() {
-    this.loginService.logout();
-    this.router.navigate(['/login']);
-  }
+  this.loginService.logout();
+  // alert("Logged out successfully");
+  window.location.href = "/login"; // Redirect to login page
+}
+
+
+
+// login tocken display for debuging purpose
+token: string | null = "";
+
+
+
 }
